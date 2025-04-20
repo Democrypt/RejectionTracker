@@ -62,7 +62,7 @@ app.MapGet("/weatherforecast", () =>
 })
 .WithName("GetWeatherForecast");
 
-app.UseCors("ReactFrontend");
+//app.UseCors("ReactFrontend");
 app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
