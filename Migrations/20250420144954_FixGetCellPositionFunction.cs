@@ -14,8 +14,8 @@ namespace RejectionTracker.Migrations
             DROP FUNCTION IF EXISTS public.get_cell_position_by_pixels(double precision, double precision);
 
             CREATE FUNCTION public.get_cell_position_by_pixels(
-                px double precision,
-                py double precision)
+                x double precision,
+                y double precision)
             RETURNS text
             LANGUAGE plpgsql
             AS $$
@@ -36,8 +36,8 @@ namespace RejectionTracker.Migrations
                     RAISE EXCEPTION 'Invalid grid settings';
                 END IF;
 
-                cell_x := floor(px / (width / cols));
-                cell_y := floor(py / (height / rows));
+                cell_x := floor(x / (width / cols));
+                cell_y := floor(y / (height / rows));
 
                 RETURN chr(65 + cell_x) || (cell_y + 1)::text;
             END;

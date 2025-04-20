@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("RejectionTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a53f58ac859ec9c271b10d435e52d7f8888186d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec6025ccab2cda0245add7aae21e76e7cef76251")]
 [assembly: System.Reflection.AssemblyProductAttribute("RejectionTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("RejectionTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
