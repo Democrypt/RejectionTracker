@@ -2,6 +2,8 @@ using Autofac.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
@@ -20,6 +22,13 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod()
               .AllowAnyHeader();
     });
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+        policy =>
+        {
+            policy.WithOrigins("https://rejection-ui.onrender.com")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
 });
 
 
@@ -54,6 +63,8 @@ app.MapGet("/weatherforecast", () =>
 .WithName("GetWeatherForecast");
 
 app.UseCors("ReactFrontend");
+app.UseCors(MyAllowSpecificOrigins);
+
 app.UseAuthorization();
 app.MapControllers();
 app.Run();
