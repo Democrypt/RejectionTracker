@@ -16,12 +16,12 @@ builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("ReactFrontend", policy =>
+    /*options.AddPolicy("ReactFrontend", policy =>
     {
         policy.WithOrigins("http://localhost:3000")
               .AllowAnyMethod()
               .AllowAnyHeader();
-    });
+    });*/
     options.AddPolicy(name: MyAllowSpecificOrigins,
         policy =>
         {
@@ -33,6 +33,12 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate(); // 👈 auto applies migrations
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
