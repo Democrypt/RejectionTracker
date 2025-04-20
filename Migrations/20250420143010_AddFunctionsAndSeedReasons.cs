@@ -12,6 +12,8 @@ namespace RejectionTracker.Migrations
         {
             // Create PostgreSQL function
             migrationBuilder.Sql(@"
+                DROP FUNCTION IF EXISTS public.get_cell_position_by_pixels(float, float);
+
                 CREATE OR REPLACE FUNCTION get_cell_position_by_pixels(x float, y float)
                 RETURNS text AS $$
                 DECLARE
