@@ -1,0 +1,54 @@
+
+services:
+  db:
+    image: postgres:15
+    container_name: rejection-db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Aa123
+      POSTGRES_DB: rejectiondb
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@demo.com
+      PGADMIN_DEFAULT_PASSWORD: Aa123
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+
+  api:
+    build:
+      context: .  # ✅ C# backend folder relative to docker-compose
+    container_name: rejection-api
+    restart: always
+    environment:
+      ConnectionStrings__DefaultConnection: Host=db;Port=5432;Username=postgres;Password=Aa123;Database=rejectiondb
+      ASPNETCORE_ENVIRONMENT: Development
+    ports:
+      - "5291:80"
+    depends_on:
+      - db
+
+  client:
+    build:
+      context: ./rejection-ui       # ✅ React frontend folder
+    container_name: rejection-ui
+    restart: always
+    ports:
+      - "3000:3000"
+    stdin_open: true
+    tty: true
+    depends_on:
+      - api
+
+volumes:
+  pgdata:

@@ -1,0 +1,13 @@
+html, body, #root {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  background-color: #1c1f21;
+  font-family: 'Segoe UI', sans-serif;
+  color: #e0e0e0;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

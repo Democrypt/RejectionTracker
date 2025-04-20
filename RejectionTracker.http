@@ -1,0 +1,6 @@
+@RejectionTracker_HostAddress = http://localhost:5291
+
+GET {{RejectionTracker_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
